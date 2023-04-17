@@ -4,10 +4,11 @@ name: Process changed files
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      FILENAME:
+        type: string
+        default: path/filename.js
 
 jobs:
   # This workflow contains a single job called "changed-files"
@@ -26,19 +27,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v16
-        with:
-          since_last_remote_commit: "true"
-          files: |
-            databases/*.json
             
-      - name: Send changed files to fts3-connector
-        if: steps.changed-files.outputs.only_changed == 'true'
+      - name: Transfer file with fts3-connector
         run: |
           source /home/ubuntu/.API_KEY
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "Calling with $file"
-            curl -H "X-AUTH-HEADER: $API_KEY" -H "Content-Type: application/json" -X POST -d @$file "http://192.168.2.197:8080/transfer"
-          done
+          echo "Calling with ${{ github.event.inputs.FILENAME }}"
+          curl -H "X-AUTH-HEADER: $API_KEY" -H "Content-Type: application/json" -X POST -d ${{ github.event.inputs.FILENAME }} "http://192.168.2.197:8080/transfer"
