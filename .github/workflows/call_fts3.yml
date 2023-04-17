@@ -40,5 +40,5 @@ jobs:
           source /home/ubuntu/.API_KEY
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Calling with $file"
-            curl -H "X-AUTH-HEADER: $API_KEY" -H "Content-Type: application/json" -X POST -d @$file "http://192.168.2.197:8080/transfer/dry"
+            curl -H "X-AUTH-HEADER: $API_KEY" -H "Content-Type: application/json" -X POST -d @$file "http://192.168.2.197:8080/transfer"
           done
