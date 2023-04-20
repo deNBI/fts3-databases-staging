@@ -34,10 +34,17 @@ jobs:
           files: |
             databases/*.json
             
+      - name: Get changed files with git diff
+        id: git-diff
+        run: |
+          git diff --name-only -r main origin/fix/client_ip | grep databases/** >> $GITHUB_OUTPUT
+      
+      - name: Check output
+        run: echo "${{ steps.git-diff.outputs }}"
+            
       - name: Send changed files to fts3-connector
         if: steps.changed-files.outputs.only_changed == 'true'
         run: |
-          source /home/ubuntu/.API_KEY
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "Calling with $file"
             curl -H "X-AUTH-HEADER: ${{ secrets.FTS3_CLIENT_API_KEY }}" -H "Content-Type: application/json" -X POST -d @$file "${{ env.FTS3_CLIENT_ENDPOINT }}/transfer/dry"
