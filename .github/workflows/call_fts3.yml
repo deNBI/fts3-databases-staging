@@ -41,5 +41,5 @@ jobs:
           declare -a CHANGED=($(git diff --name-only -r origin/main origin/fix/client_ip | grep databases/**))
           for file in "${CHANGED[@]}"; do
             echo "Calling with $file"
-            curl -H "X-AUTH-HEADER: ${{ secrets.FTS3_CLIENT_API_KEY }}" -H "Content-Type: application/json" -X POST -d @$file "${{ env.FTS3_CLIENT_ENDPOINT }}/transfer/dry"
+            curl -H "X-AUTH-HEADER: ${{ secrets.FTS3_CLIENT_API_KEY }}" -H "Content-Type: application/json" -X POST -d @$file "${{ vars.FTS3_CLIENT_ENDPOINT }}/transfer/dry"
           done
