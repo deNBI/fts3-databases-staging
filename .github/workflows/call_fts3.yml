@@ -37,13 +37,12 @@ jobs:
       - name: Get changed files with git diff
         id: git-diff
         run: |
-          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "CHANGED<<$EOF" >> $GITHUB_OUTPUT
-          git diff --name-only -r origin/main origin/fix/client_ip | grep databases/** >> $GITHUB_OUTPUT
-          echo "$EOF" >> $GITHUB_OUTPUT
+          echo "CHANGED=($(git diff --name-only -r origin/main origin/fix/client_ip | grep databases/**))" >> $GITHUB_OUTPUT
       
       - name: Check output
-        run: echo "${{ steps.git-diff.outputs.CHANGED }}"
+        run: |
+          for file in ${{ steps.git-diff.outputs.CHANGED }}; do
+            echo "$file"
             
       - name: Send changed files to fts3-connector
         if: steps.changed-files.outputs.only_changed == 'true'
