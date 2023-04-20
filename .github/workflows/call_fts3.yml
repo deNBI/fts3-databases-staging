@@ -39,8 +39,7 @@ jobs:
         id: git-diff
         run: |
           declare -a CHANGED=($(git diff --name-only -r origin/main origin/fix/client_ip | grep databases/**))
-          echo "${CHANGED_ARRAY[@]}"
-          for changed_file in "${CHANGED_ARRAY[@]}"; do
+          for changed_file in "${CHANGED[@]}"; do
             echo "$changed_file"
           done
             
