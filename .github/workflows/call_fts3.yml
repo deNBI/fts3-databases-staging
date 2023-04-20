@@ -21,6 +21,9 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps: 
+      - name: Install jq
+        run: sudo apt-get install jq
+    
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         with:
@@ -37,7 +40,8 @@ jobs:
       - name: Get changed files with git diff
         id: git-diff
         run: |
-          echo "CHANGED=($(git diff --name-only -r origin/main origin/fix/client_ip | grep databases/**))" >> $GITHUB_OUTPUT
+          CHANGED_ARRAY=($(git diff --name-only -r origin/main origin/fix/client_ip | grep databases/**))
+          echo "CHANGED=$(jq --compact-output --null-input '$ARGS.positional' --args -- "${CHANGED_ARRAY[@]}")" >> $GITHUB_OUTPUT
       
       - name: Check output
         run: |
