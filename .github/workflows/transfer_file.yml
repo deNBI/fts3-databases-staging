@@ -1,0 +1,33 @@
+name: Transfer file
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    inputs:
+      FILENAME:
+        type: string
+        default: path/filename.json
+
+jobs:
+  # This workflow contains a single job called "changed-files"
+  changed-files:
+    # The type of runner that the job will run on
+    runs-on: [self-hosted, fts3]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Add mask
+        run: |
+          source /home/ubuntu/.API_KEY
+          echo "::add-mask::$API_KEY"   
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+            
+      - name: Transfer file with fts3-connector
+        run: |
+          source /home/ubuntu/.API_KEY
+          echo "Calling with ${{ github.event.inputs.FILENAME }}"
+          curl -H "X-AUTH-HEADER: $API_KEY" -H "Content-Type: application/json" -X POST -d @${{ github.event.inputs.FILENAME }} "http://192.168.2.197:8080/transfer"
