@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
     inputs:
       FILENAME:
+        required: true
         type: string
-        default: path/filename.json
 
 jobs:
   # This workflow contains a single job called "changed-files"
