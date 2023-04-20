@@ -38,7 +38,8 @@ jobs:
       - name: Get changed files with git diff
         id: git-diff
         run: |
-          CHANGED=($(git diff --name-only -r origin/main origin/fix/client_ip | grep databases/**))
+          declare -a CHANGED=($(git diff --name-only -r origin/main origin/fix/client_ip | grep databases/**))
+          echo "${CHANGED_ARRAY[@]}"
           for changed_file in "${CHANGED_ARRAY[@]}"; do
             echo "$changed_file"
           done
