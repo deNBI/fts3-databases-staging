@@ -11,7 +11,15 @@ on:
     paths:
       - 'databases/**.json'
   workflow_dispatch:
-
+    inputs:
+      base:
+        type: string
+        required: true
+      head:
+        type: string
+        required: true
+    
+    
 jobs:
   # This workflow contains a single job called "changed-files"
   changed-files:
@@ -38,7 +46,7 @@ jobs:
       - name: Get changed files with git diff and send to fts3-connector
         id: git-diff
         run: |
-          declare -a CHANGED=($(git diff --name-only -r origin/main origin/fix/client_ip | grep databases/**))
+          declare -a CHANGED=($(git diff --name-only -r origin/${{ github.base_ref || github.event.inputs.base }} origin/${{ github.head_ref || github.event.inputs.head }} | grep databases/**))
           for file in "${CHANGED[@]}"; do
             echo "Calling with $file"
             curl -H "X-AUTH-HEADER: ${{ secrets.FTS3_CLIENT_API_KEY }}" -H "Content-Type: application/json" -X POST -d @$file "${{ vars.FTS3_CLIENT_ENDPOINT }}/transfer/dry"
