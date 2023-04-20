@@ -37,7 +37,7 @@ jobs:
       - name: Get changed files with git diff
         id: git-diff
         run: |
-          git diff --name-only -r main origin/fix/client_ip | grep databases/** >> $GITHUB_OUTPUT
+          git diff --name-only -r origin/main origin/fix/client_ip | grep databases/** >> $GITHUB_OUTPUT
       
       - name: Check output
         run: echo "${{ steps.git-diff.outputs }}"
