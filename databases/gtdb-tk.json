@@ -1,0 +1,15 @@
+{
+  "name": "GTDB-Tk",
+  "path": "gtdb_tk",
+  "versions": [
+    {
+      "name": "2023-06-09",
+      "path": "auxiliary_files",
+      "files": [
+        {
+          "source": "https://data.gtdb.ecogenomic.org/releases/latest/auxillary_files/gtdbtk_data.tar.gz"
+        }
+      ]
+    }
+  ]
+}
