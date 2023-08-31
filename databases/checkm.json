@@ -1,0 +1,16 @@
+{
+  "name": "Checkm",
+  "path": "checkm",
+  "versions": [
+    {
+      "name": "v1",
+      "path": "v1",
+      "files": [
+        {
+          "source": "10.5281/zenodo.7401545",
+          "zenodo": true
+        }
+      ]
+    }
+  ]
+}
