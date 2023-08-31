@@ -1,0 +1,29 @@
+name: Transfer file
+
+# Controls when the workflow will run
+on:
+  workflow_dispatch:
+    inputs:
+      FILENAME:
+        required: true
+        type: string
+
+jobs:
+  # This workflow contains a single job called "changed-files"
+  changed-files:
+    # The type of runner that the job will run on
+    runs-on: [self-hosted, fts3]
+    environment: APPROVAL_REQUIRED
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+            
+      - name: Transfer file with fts3-connector
+        run: |
+          echo "Calling with ${{ github.event.inputs.FILENAME }}"
+          curl -H "X-AUTH-HEADER: ${{ secrets.FTS3_CLIENT_API_KEY }}" -H "Content-Type: application/json" -X POST -d @${{ github.event.inputs.FILENAME }} "${{ vars.FTS3_CLIENT_ENDPOINT }}/transfer"
