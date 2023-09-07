@@ -1,6 +1,9 @@
 {
   "filenames": [
     "blast.json",
-    "gtdb-tk.json"
+    "gtdb-tk.json",
+    "card.json",
+    "checkm.json",
+    "plsdb.json"
   ]
 }
