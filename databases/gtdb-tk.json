@@ -10,24 +10,6 @@
           "source": "https://data.gtdb.ecogenomic.org/releases/latest/auxillary_files/gtdbtk_data.tar.gz"
         }
       ]
-    },
-    {
-      "name": "2022-04-01",
-      "path": "auxiliary_files",
-      "files": [
-        {
-          "source": "https://data.gtdb.ecogenomic.org/releases/release207/207.0/auxillary_files/gtdbtk_r207_data.tar.gz"
-        }
-      ]
-    },
-    {
-      "name": "2021-04-26",
-      "path": "auxiliary_files",
-      "files": [
-        {
-          "source": "https://data.gtdb.ecogenomic.org/releases/release202/202.0/auxillary_files/gtdbtk_r202_data.tar.gz"
-        }
-      ]
     }
   ]
 }
