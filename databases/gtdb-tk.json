@@ -7,7 +7,7 @@
       "path": "auxiliary_files",
       "files": [
         {
-          "source": "https://data.gtdb.ecogenomic.org/releases/latest/auxillary_files/gtdbtk_data.tar.gz"
+          "source": "https://data.gtdb.ecogenomic.org/releases/release214/214.0/auxillary_files/gtdbtk_r214_data.tar.gz"
         }
       ]
     }
