@@ -1,0 +1,15 @@
+{
+  "name": "CARD",
+  "path": "card",
+  "versions": [
+    {
+      "name": "3.2.7",
+      "path": "data",
+      "files": [
+        {
+          "source": "https://card.mcmaster.ca/download/0/broadstreet-v3.2.7.tar.bz2"
+        }
+      ]
+    }
+  ]
+}
