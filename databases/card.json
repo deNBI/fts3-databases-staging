@@ -1,5 +1,6 @@
 {
   "name": "CARD",
+  "doi": "test doi",
   "path": "card",
   "versions": [
     {
